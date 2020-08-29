@@ -35,15 +35,15 @@ public class DbInit implements CommandLineRunner {
     }
 
     public void addData(){
-        User user1 = new User("Vlad", "Tumi", "vt@mail.pl", "aghagh");
+        User user1 = new User("vt","Vlad", "Tumi", "vt@mail.pl", "aghagh");
         userRepository.save(user1);
-        User user2 = new User("Andriy", "Tri", "at@mail.pl", "aghagh");
+        User user2 = new User("at","Andriy", "Tri", "at@mail.pl", "aghagh");
         userRepository.save(user2);
-        User user3 = new User("Lena", "Obe", "lo@mail.pl", "aghagh");
+        User user3 = new User("lo","Lena", "Obe", "lo@mail.pl", "aghagh");
         userRepository.save(user3);
-        User user4 = new User("Ania", "Klu", "ak@mail.pl", "aghagh");
+        User user4 = new User("ak","Ania", "Klu", "ak@mail.pl", "aghagh");
         userRepository.save(user4);
-        User user5 = new User("Kuba", "Mita", "km@mail.pl", "aghagh");
+        User user5 = new User("kh","Kuba", "Mita", "km@mail.pl", "aghagh");
         userRepository.save(user5);
 
         Project project1 = new Project("Web App", "Project for hackathon", LocalDateTime.of(2020,10,11,11,0));
@@ -177,32 +177,16 @@ public class DbInit implements CommandLineRunner {
         taskRepository.save(task44);
         projectRepository.save(project4);
 
+
+
+        Role roleUser = new Role(ERole.ROLE_USER);
+        Role roleMod = new Role(ERole.ROLE_MODERATOR);
+        roleRepository.saveAll(Arrays.asList(roleMod, roleUser));
     }
 
     @Override
     public void run(String... args) throws Exception {
         addData();
-    public void run(String... args) {
-        User user = new User("nickname1", "eorgj@gmail.com", "234234");
-        userRepository.save(user);
 
-        Project project = new Project("Some title");
-        projectRepository.save(project);
-
-        Task task = new Task("task1", "our first task", TaskState.IN_PROCESS, LocalDateTime.now(), LocalDateTime.now(), LocalDateTime.now());
-        task.setProject(project);
-        taskRepository.save(task);
-
-        user.getProjects().add(project);
-        project.getUsers().add(user);
-        project.getTasks().add(task);
-
-        userRepository.save(user);
-        projectRepository.save(project);
-
-        Role roleUser = new Role(ERole.ROLE_USER);
-        Role roleMod = new Role(ERole.ROLE_MODERATOR);
-        roleRepository.saveAll(Arrays.asList(roleMod, roleUser));
-        taskRepository.save(task);
     }
 }
