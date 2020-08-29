@@ -38,11 +38,23 @@ public class Project {
     @ManyToMany(mappedBy = "projects")
     private Set<User> users = new HashSet<>();
 
+    @OneToMany
+    @JoinColumn(name = "fk_projects")
+    private Set<Task> tasks = new HashSet<>();
+
     public Project() {
     }
 
     public Project(String title) {
         this.title = title;
+    }
+
+    public Set<Task> getTasks() {
+        return tasks;
+    }
+
+    public void setTasks(Set<Task> tasks) {
+        this.tasks = tasks;
     }
 
     public Long getId() {
@@ -93,11 +105,7 @@ public class Project {
         this.updateDateTime = updateDateTime;
     }
 
-    public Set<User> getUsers() {
-        return users;
-    }
+    public Set<User> getUsers() {return users;}
 
-    public void setUsers(Set<User> users) {
-        this.users = users;
-    }
+    public void setUsers(Set<User> users) {this.users = users;}
 }
