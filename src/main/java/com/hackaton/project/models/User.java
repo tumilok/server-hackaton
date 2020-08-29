@@ -21,13 +21,17 @@ public class User {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @NotBlank
+ // @NotBlank
     @Size(max = 50)
     private String firstName;
 
-    @NotBlank
+ // @NotBlank
     @Size(max = 50)
     private String lastName;
+
+    @NotBlank
+    @Size(max = 20)
+    private String username;
 
     @NotBlank
     @Size(max = 50)
@@ -44,9 +48,16 @@ public class User {
     @UpdateTimestamp
     private LocalDateTime updateDateTime;
 
-    @ManyToMany
+    @ManyToMany(fetch = FetchType.LAZY)
+    @JoinTable(	name = "user_roles",
+            joinColumns = @JoinColumn(name = "user_id"),
+            inverseJoinColumns = @JoinColumn(name = "role_id")
+    )
+    private Set<Role> roles = new HashSet<>();
+
+    @ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(
-            name = "User_Project",
+            name = "user_project",
             joinColumns = @JoinColumn(name = "user_id"),
             inverseJoinColumns = @JoinColumn(name = "project_id")
     )
@@ -55,9 +66,8 @@ public class User {
     public User() {
     }
 
-    public User(String firstName, String lastName, String email, String password) {
-        this.firstName = firstName;
-        this.lastName = lastName;
+    public User(String username, String email, String password) {
+        this.username = username;
         this.email = email;
         this.password = password;
     }
@@ -84,6 +94,14 @@ public class User {
 
     public void setLastName(String lastName) {
         this.lastName = lastName;
+    }
+
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
     }
 
     public String getEmail() {
@@ -118,7 +136,19 @@ public class User {
         this.updateDateTime = updateDateTime;
     }
 
-    public Set<Project> getProjects() {return projects;}
+    public Set<Project> getProjects() {
+        return projects;
+    }
 
-    public void setProjects(Set<Project> projects) {this.projects = projects;}
+    public void setProjects(Set<Project> projects) {
+        this.projects = projects;
+    }
+
+    public Set<Role> getRoles() {
+        return roles;
+    }
+
+    public void setRoles(Set<Role> roles) {
+        this.roles = roles;
+    }
 }
