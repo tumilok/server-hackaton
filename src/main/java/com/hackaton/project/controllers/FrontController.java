@@ -39,7 +39,6 @@ public class FrontController {
                     u.getLastName(),
                     u.getUsername(),
                     u.getEmail(),
-                    u.getPassword(),
                     ids
             ));
         }

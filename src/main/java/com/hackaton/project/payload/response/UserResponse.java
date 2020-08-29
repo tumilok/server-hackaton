@@ -1,9 +1,6 @@
 package com.hackaton.project.payload.response;
 
-import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
 public class UserResponse {
     private Long id;
@@ -11,16 +8,14 @@ public class UserResponse {
     private String lastName;
     private String username;
     private String email;
-    private String password;
     private List<Long> projectsId;
 
-    public UserResponse(Long id, String firstName, String lastName, String username, String email, String password, List<Long> projectsId) {
+    public UserResponse(Long id, String firstName, String lastName, String username, String email, List<Long> projectsId) {
         this.id = id;
         this.firstName = firstName;
         this.lastName = lastName;
         this.username = username;
         this.email = email;
-        this.password = password;
         this.projectsId = projectsId;
     }
 
@@ -62,14 +57,6 @@ public class UserResponse {
 
     public void setEmail(String email) {
         this.email = email;
-    }
-
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
     }
 
     public List<Long> getProjectsId() {
