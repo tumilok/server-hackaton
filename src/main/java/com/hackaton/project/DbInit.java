@@ -15,7 +15,7 @@ public class DbInit implements CommandLineRunner {
 
     @Override
     public void run(String... args) throws Exception {
-        User user = new User("slgj", "eorgj@gmail.com", "234234");
+        User user = new User("alrkg", "sdgj", "eorgj@gmail.com", "234234");
         userRepository.save(user);
         //User user = new User("Vasia", "Petrov", "petrov@gmail.com", "12345");
         //userRepository.save(user);
