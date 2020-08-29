@@ -24,8 +24,8 @@ public class DbInit implements CommandLineRunner {
     private RoleRepository roleRepository;
     private TaskRepository  taskRepository;
 
-    public DbInit(UserRepository userRepository, ProjectRepository projectRepository, RoleRepository roleRepository) {
-    public DbInit(UserRepository userRepository, ProjectRepository projectRepository, TaskRepository taskRepository ) {
+    public DbInit(UserRepository userRepository, ProjectRepository projectRepository,
+                  RoleRepository roleRepository, TaskRepository taskRepository) {
         this.userRepository = userRepository;
         this.projectRepository = projectRepository;
         this.roleRepository = roleRepository;
@@ -33,7 +33,7 @@ public class DbInit implements CommandLineRunner {
     }
 
     @Override
-    public void run(String... args) throws Exception {
+    public void run(String... args) {
         User user = new User("nickname1", "eorgj@gmail.com", "234234");
         userRepository.save(user);
 
