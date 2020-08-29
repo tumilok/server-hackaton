@@ -118,11 +118,7 @@ public class User {
         this.updateDateTime = updateDateTime;
     }
 
-    public Set<Project> getProjects() {
-        return projects;
-    }
+    public Set<Project> getProjects() {return projects;}
 
-    public void setProjects(Set<Project> projects) {
-        this.projects = projects;
-    }
+    public void setProjects(Set<Project> projects) {this.projects = projects;}
 }
