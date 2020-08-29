@@ -62,7 +62,6 @@
             <version>5.7.0-RC1</version>
             <scope>test</scope>
         </dependency>
-
     </dependencies>
 
     <build>
