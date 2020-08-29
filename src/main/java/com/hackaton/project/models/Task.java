@@ -27,18 +27,37 @@ public class Task {
     private LocalDateTime startTime;
     private LocalDateTime endTime;
     private LocalDateTime deadline;
+    private Integer timeLimit;
 
     private TaskState state;
 
     public Task(){}
 
-    public Task(String taskName, String description, TaskState state, LocalDateTime startTime, LocalDateTime endTime, LocalDateTime deadline){
+    public Task(String taskName, String description, TaskState state, LocalDateTime startTime, LocalDateTime endTime, LocalDateTime deadline, Integer timeLimit){
         this.taskName=taskName;
         this.description = description;
         this.state=state;
         this.startTime = startTime;
         this.endTime = endTime;
         this.deadline = deadline;
+        this.timeLimit = timeLimit;
+    }
+
+    public Task(String taskName, String description, TaskState state, LocalDateTime startTime, LocalDateTime deadline, Integer timeLimit){
+        this.taskName=taskName;
+        this.description = description;
+        this.state=state;
+        this.startTime = startTime;
+        this.deadline = deadline;
+        this.timeLimit = timeLimit;
+    }
+
+    public Task(String taskName, String description, TaskState state, LocalDateTime deadline, Integer timeLimit){
+        this.taskName=taskName;
+        this.description = description;
+        this.state=state;
+        this.deadline = deadline;
+        this.timeLimit = timeLimit;
     }
 
     public void setProject(Project project) {

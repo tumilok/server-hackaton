@@ -27,7 +27,7 @@ public class Project {
     private String description;
 
     @DateTimeFormat
-    private Date deadline;
+    private LocalDateTime deadline;
 
     @CreationTimestamp
     private LocalDateTime createDateTime;
@@ -48,6 +48,13 @@ public class Project {
     public Project(String title) {
         this.title = title;
     }
+
+    public Project(String title, String description, LocalDateTime deadline) {
+        this.title = title;
+        this.description = description;
+        this.deadline = deadline;
+    }
+
 
     public Set<Task> getTasks() {
         return tasks;
@@ -81,11 +88,11 @@ public class Project {
         this.description = description;
     }
 
-    public Date getDeadline() {
+    public LocalDateTime getDeadline() {
         return deadline;
     }
 
-    public void setDeadline(Date deadline) {
+    public void setDeadline(LocalDateTime deadline) {
         this.deadline = deadline;
     }
 
