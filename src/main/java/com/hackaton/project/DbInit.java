@@ -18,6 +18,7 @@ import java.util.Arrays;
 
 import java.time.LocalDateTime;
 import java.util.Arrays;
+import java.util.Set;
 
 @Service
 public class DbInit implements CommandLineRunner {
@@ -177,11 +178,16 @@ public class DbInit implements CommandLineRunner {
         taskRepository.save(task44);
         projectRepository.save(project4);
 
-
-
         Role roleUser = new Role(ERole.ROLE_USER);
-        Role roleMod = new Role(ERole.ROLE_MODERATOR);
-        roleRepository.saveAll(Arrays.asList(roleMod, roleUser));
+        roleUser.setUsers(Set.of(user1, user2,user3,user4));
+        roleRepository.save(roleUser);
+
+    /*    user1.setRoles(Set.of(roleUser));
+        user2.setRoles(Set.of(roleUser));
+        user3.setRoles(Set.of(roleUser));
+        user4.setRoles(Set.of(roleUser));
+        */
+
     }
 
     @Override
