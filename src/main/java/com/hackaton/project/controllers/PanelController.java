@@ -3,6 +3,7 @@ package com.hackaton.project.controllers;
 import com.hackaton.project.models.Project;
 import com.hackaton.project.models.Task;
 import com.hackaton.project.models.User;
+import com.hackaton.project.payload.response.ProjectResponse;
 import com.hackaton.project.repository.ProjectRepository;
 import com.hackaton.project.repository.TaskRepository;
 import com.hackaton.project.repository.UserRepository;
@@ -33,14 +34,14 @@ public class PanelController {
     }
 
     @GetMapping("/projects/{userId}")
-    public List<Project> getUserProjects(@PathVariable Long userId) {
+    public List<ProjectResponse> getUserProjects(@PathVariable Long userId) {
         Optional<User> user = userRepository.findById(userId);
         if (user.isPresent()) {
             List<Project> projects = projectRepository.findAll();
-            List<Project> returnList = new ArrayList<>();
+            List<ProjectResponse> returnList = new ArrayList<>();
             for (Project p: projects) {
                 if (p.getUsers().contains(user.get())) {
-                    returnList.add(p);
+                    returnList.add(new ProjectResponse(p.getId(), p.getTitle(), p.getDescription(), p.getDeadline()));
                 }
             }
             if (returnList.size() > 0) {
