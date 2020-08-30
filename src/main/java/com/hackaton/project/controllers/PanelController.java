@@ -6,6 +6,7 @@ import com.hackaton.project.models.User;
 import com.hackaton.project.payload.request.AddProjectRequest;
 import com.hackaton.project.payload.response.MessageResponse;
 import com.hackaton.project.payload.response.ProjectResponse;
+import com.hackaton.project.payload.response.TasksResponse;
 import com.hackaton.project.repository.ProjectRepository;
 import com.hackaton.project.repository.TaskRepository;
 import com.hackaton.project.repository.UserRepository;
@@ -24,17 +25,24 @@ import java.util.*;
 public class PanelController {
     @Autowired
     TaskRepository taskRepository;
-
     @Autowired
     ProjectRepository projectRepository;
-
     @Autowired
     UserRepository userRepository;
 
     @GetMapping("/tasks/{projectId}")
-    public List<Task> projectTasks(@PathVariable String projectId) {
-        Optional<Project> project = projectRepository.findById(Long.parseLong(projectId));
-        return project.map(value -> taskRepository.findByProject(value)).orElse(null);
+    public List<TasksResponse> getProjectTasks(@PathVariable String projectId) {
+        Optional<Project> project = projectRepository.findById(Long.valueOf(projectId));
+        if (project.isPresent()) {
+            List<TasksResponse> taskResponses = new ArrayList<>();
+            List<Task> tasks= taskRepository.findByProject(project.get());
+            for(Task t:tasks){
+                taskResponses.add(new TasksResponse(t));
+            }
+            return taskResponses;
+        } else {
+            return null;
+        }
     }
 
     @GetMapping("/projects/{userId}")
@@ -119,5 +127,23 @@ public class PanelController {
         projectRepository.save(project);
 
         return ResponseEntity.ok(new MessageResponse("Project added successfully!"));
+    }
+
+    @PostMapping("/project/addUser/{projectId}/{userId}")
+    public List<ProjectResponse> addUserToProject(@PathVariable String projectId, @PathVariable String userId) {
+        Optional<User> user = userRepository.findById(Long.valueOf(userId));
+        if (user.isPresent()) {
+            List<Project> projects = projectRepository.findAll(); // USER PROJECT
+            List<ProjectResponse> returnList = new ArrayList<>();
+            for (Project p: projects) {
+                if (p.getUsers().contains(user.get())) {
+                    returnList.add(new ProjectResponse(p));
+                }
+            }
+            if (returnList.size() > 0) {
+                return returnList;
+            }
+        }
+        return null;
     }
 }

@@ -1,5 +1,7 @@
 package com.hackaton.project.payload.response;
 
+import com.hackaton.project.models.Project;
+
 import java.time.LocalDateTime;
 
 public class ProjectResponse {
@@ -13,6 +15,13 @@ public class ProjectResponse {
         this.title = title;
         this.description = description;
         this.deadline = deadline;
+    }
+
+    public ProjectResponse(Project project) {
+        this.id = project.getId();
+        this.title = project.getTitle();
+        this.description = project.getDescription();
+        this.deadline = project.getDeadline();
     }
 
     public Long getId() {
