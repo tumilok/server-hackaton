@@ -65,6 +65,7 @@ public class PanelController {
                         addProjectRequest.getDeadline(),
                         DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm"))        // "2016-03-04 11:30";
         );
+        projectRepository.save(project);
 
         Set<String> strUsers = addProjectRequest.getUsers();
         Set<User> users = new HashSet<>();
@@ -82,6 +83,7 @@ public class PanelController {
             });
         }
         project.setUsers(users);
+        userRepository.saveAll(users);
 
         List<String> strTasksNames = addProjectRequest.getTasksNames();
         List<String> strTasksDescriptions = addProjectRequest.getTasksDescriptions();
@@ -113,9 +115,8 @@ public class PanelController {
             }
         }
         project.setTasks(tasks);
-
-        userRepository.saveAll(users);
         taskRepository.saveAll(tasks);
+
         projectRepository.save(project);
 
         return ResponseEntity.ok(new MessageResponse("Project added successfully!"));
