@@ -127,10 +127,7 @@ public class AuthController {
 
     @GetMapping("/validate/{token}")
     public boolean isTokenValidate(@PathVariable String token) {
-        registerUser(new SignupRequest( "fsiody" , "fs@Email.pl", Set.of("ROLE_USER"), "12345678"));
-        authenticateUser(new LoginRequest("fsiody","12345678"));
-        return true;
-      //  return jwtUtils.validateJwtToken(token);
+        return jwtUtils.validateJwtToken(token);
     }
 
 }
