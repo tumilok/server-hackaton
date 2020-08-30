@@ -131,20 +131,22 @@ public class PanelController {
     }
 
     @PostMapping("/project/addUser/{projectId}/{userId}")
-    public List<ProjectResponse> addUserToProject(@PathVariable String projectId, @PathVariable String userId) {
+    public ResponseEntity<?>  addUserToProject(@PathVariable String projectId, @PathVariable String userId) {
         Optional<User> user = userRepository.findById(Long.valueOf(userId));
         if (user.isPresent()) {
-            List<Project> projects = projectRepository.findAll(); // USER PROJECT
-            List<ProjectResponse> returnList = new ArrayList<>();
-            for (Project p: projects) {
-                if (p.getUsers().contains(user.get())) {
-                    returnList.add(new ProjectResponse(p));
-                }
+            Optional<Project> project = projectRepository.findById(Long.valueOf(projectId));
+            if(project.isPresent()) {
+                Set<User> users = project.get().getUsers();
+                users.add(user.get());
+                project.get().setUsers(users);
+                return ResponseEntity.ok(new MessageResponse("Member added successfully!"));
             }
-            if (returnList.size() > 0) {
-                return returnList;
+            else{
+                return ResponseEntity.badRequest().body(new MessageResponse("Error: Invalid project data."));
             }
         }
-        return null;
+        else{
+            return ResponseEntity.badRequest().body(new MessageResponse("Error: Invalid user data."));
+        }
     }
 }
