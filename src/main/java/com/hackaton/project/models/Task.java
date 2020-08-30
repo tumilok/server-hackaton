@@ -41,6 +41,34 @@ public class Task {
         this.timeLimit = timeLimit;
     }
 
+    public Task(String taskName, String description, ETask state, LocalDateTime startTime, LocalDateTime deadline, Integer timeLimit){
+        this.taskName=taskName;
+        this.description = description;
+        this.state=state;
+        this.startTime = startTime;
+        this.deadline = deadline;
+        this.timeLimit = timeLimit;
+    }
+
+    public Task(String taskName, String description, ETask state, LocalDateTime deadline, Integer timeLimit){
+        this.taskName=taskName;
+        this.description = description;
+        this.state=state;
+        this.deadline = deadline;
+        this.timeLimit = timeLimit;
+    }
+
+    public Task(@NotBlank @Size(max = 50) String taskName, @Size(max = 500) String description,  ETask state, LocalDateTime startTime, LocalDateTime endTime, LocalDateTime deadline, Integer timeLimit) {
+        this.taskName = taskName;
+        this.description = description;
+        this.startTime = startTime;
+        this.endTime = endTime;
+        this.deadline = deadline;
+        this.timeLimit = timeLimit;
+        this.project = project;
+        this.state = state;
+    }
+
     public Long getId() {
         return id;
     }

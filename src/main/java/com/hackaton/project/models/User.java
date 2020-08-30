@@ -78,6 +78,16 @@ public class User {
         this.email = email;
         this.password = password;
     }
+
+    public User(@Size(max = 50) String firstName, @Size(max = 50) String lastName, @NotBlank @Size(max = 20) String username, @NotBlank @Size(max = 50) @Email String email, @NotBlank @Size(max = 120) String password, Role role) {
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.username = username;
+        this.email = email;
+        this.password = password;
+        this.roles = Set.of(role);
+    }
+
     public Long getId() {
         return id;
     }
@@ -149,6 +159,8 @@ public class User {
     public void setProjects(Set<Project> projects) {
         this.projects = projects;
     }
+
+    public void addRole(ERole role){ this.roles.add(new Role(role)); }
 
     public Set<Role> getRoles() {
         return roles;

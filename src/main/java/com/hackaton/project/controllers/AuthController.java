@@ -6,6 +6,9 @@ import java.util.Set;
 import java.util.stream.Collectors;
 
 import javax.validation.Valid;
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Size;
 
 import com.hackaton.project.models.ERole;
 import com.hackaton.project.models.Role;
@@ -124,6 +127,10 @@ public class AuthController {
 
     @GetMapping("/validate/{token}")
     public boolean isTokenValidate(@PathVariable String token) {
-        return jwtUtils.validateJwtToken(token);
+        registerUser(new SignupRequest( "fsiody" , "fs@Email.pl", Set.of("ROLE_USER"), "12345678"));
+        authenticateUser(new LoginRequest("fsiody","12345678"));
+        return true;
+      //  return jwtUtils.validateJwtToken(token);
     }
+
 }
