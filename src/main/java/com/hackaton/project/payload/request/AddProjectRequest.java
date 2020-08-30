@@ -1,5 +1,7 @@
 package com.hackaton.project.payload.request;
 
+import com.hackaton.project.payload.response.TasksResponse;
+
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
 import java.util.List;
@@ -15,11 +17,7 @@ public class AddProjectRequest {
 
     private String deadline;
     private Set<String> users;
-
-    private List<String> tasksNames;
-    private List<String> tasksDescriptions;
-    private List<String> tasksDeadlines;
-    private List<String> tasksTimeLimits;
+    private Set<TaskRequest> tasksRequests;
 
     public String getTitle() {
         return title;
@@ -53,6 +51,16 @@ public class AddProjectRequest {
         this.users = users;
     }
 
+    public Set<TaskRequest> getTasksRequests() {
+        return tasksRequests;
+    }
+
+    public void setTasksRequests(Set<TaskRequest> tasksRequests) {
+        this.tasksRequests = tasksRequests;
+    }
+
+    /*
+
     public List<String> getTasksNames() {
         return tasksNames;
     }
@@ -84,4 +92,6 @@ public class AddProjectRequest {
     public void setTasksTimeLimits(List<String> tasksTimeLimits) {
         this.tasksTimeLimits = tasksTimeLimits;
     }
+
+     */
 }

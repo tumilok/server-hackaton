@@ -4,6 +4,8 @@ import com.hackaton.project.models.Project;
 import com.hackaton.project.models.Task;
 import com.hackaton.project.models.User;
 import com.hackaton.project.payload.request.AddProjectRequest;
+import com.hackaton.project.payload.request.TaskRequest;
+import com.hackaton.project.payload.response.AddProjectResponse;
 import com.hackaton.project.payload.response.MessageResponse;
 import com.hackaton.project.payload.response.ProjectResponse;
 import com.hackaton.project.payload.response.TasksResponse;
@@ -19,7 +21,7 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.*;
 
-@CrossOrigin(origins = "*", maxAge = 3600)
+@CrossOrigin(origins = "*", allowedHeaders = "*", maxAge = 3600)
 @RestController
 @RequestMapping("api/panel")
 public class PanelController {
@@ -93,41 +95,26 @@ public class PanelController {
         project.setUsers(users);
         userRepository.saveAll(users);
 
-        List<String> strTasksNames = addProjectRequest.getTasksNames();
-        List<String> strTasksDescriptions = addProjectRequest.getTasksDescriptions();
-        List<String> strTasksDeadlines = addProjectRequest.getTasksDeadlines();
-        List<String> strTasksTimeLimits = addProjectRequest.getTasksTimeLimits();
-        Set<Task> tasks = new HashSet<>();
+        Set<TaskRequest> taskRequests = addProjectRequest.getTasksRequests();
 
-        if (strTasksNames != null && strTasksDescriptions != null &&
-                strTasksDeadlines != null && strTasksTimeLimits != null) {
-            if (strTasksNames.size() == strTasksDescriptions.size() &&
-                    strTasksDeadlines.size() == strTasksTimeLimits.size() &&
-                    strTasksNames.size() == strTasksDeadlines.size()) {
-                for (int i = 0; i < strTasksNames.size(); i++) {
-                    Task tempTask = new Task(
-                            strTasksNames.get(i),
-                            strTasksDescriptions.get(i),
-                            LocalDateTime.parse(
-                                    strTasksDeadlines.get(i),
-                                    DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm")),       // "2016-03-04 11:30";
-                            Integer.parseInt(strTasksTimeLimits.get(i))
-                    );
-                    tempTask.setProject(project);
-                    tasks.add(tempTask);
-                }
-            } else {
-                return ResponseEntity
-                        .badRequest()
-                        .body(new MessageResponse("Error: Invalid task data."));
-            }
+        if (taskRequests != null) {
+            Set<Task> tasks = new HashSet<>();
+            taskRequests.forEach(tr -> tasks.add(new Task(
+                    tr.getTaskName(),
+                    tr.getDescription(),
+                    LocalDateTime.parse(
+                            tr.getDeadline(),
+                            DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm")        // "2016-03-04 11:30";
+                    ),
+                    Integer.parseInt(tr.getTimeLimit())
+            )));
+            project.setTasks(tasks);
+            taskRepository.saveAll(tasks);
         }
-        project.setTasks(tasks);
-        taskRepository.saveAll(tasks);
 
         projectRepository.save(project);
 
-        return ResponseEntity.ok(new MessageResponse("Project added successfully!"));
+        return ResponseEntity.ok(new AddProjectResponse(project));
     }
 
     @PostMapping("/project/addUser/{projectId}/{userId}")
