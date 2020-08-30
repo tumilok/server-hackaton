@@ -82,95 +82,82 @@ public class DbInit implements CommandLineRunner {
         userRepository.saveAll(Arrays.asList(user1,user2,user3,user4));
 
 
-        Task task11 = new Task("Frontend", "", ETask.IN_PROCESS,
-                LocalDateTime.of(2020,8,10,10,10),
-                LocalDateTime.of(2020,10,1,23,59), 50);
+        Task task11 = new Task("Frontend", "",
+                LocalDateTime.of(2020,8,10,10,10), 50);
         task11.setProject(project1);
         taskRepository.save(task11);
         project1.getTasks().add(task11);
-        Task task12 = new Task("Backend", "", ETask.NEED_HELP,
-                LocalDateTime.of(2020,8,10,10,10),
-                LocalDateTime.of(2020,10,1,23,59), 50);
+        Task task12 = new Task("Backend", "",
+                LocalDateTime.of(2020,8,10,10,10), 50);
         task12.setProject(project1);
         taskRepository.save(task12);
         project1.getTasks().add(task12);
         projectRepository.save(project1);
 
-        Task task21 = new Task("Idea", "", ETask.IN_PROCESS,
-                LocalDateTime.of(2020,8,21,10,10),
-                LocalDateTime.of(2020,8,31,23,59), 2);
+        Task task21 = new Task("Idea", "",
+                LocalDateTime.of(2020,8,21,10,10), 2);
         task21.setProject(project2);
         taskRepository.save(task21);
         project2.getTasks().add(task21);
-        Task task22 = new Task("GoodSide", "", ETask.TO_DO,
+        Task task22 = new Task("GoodSide", "",
                 LocalDateTime.of(2020,10,31,23,59), 10);
         task22.setProject(project2);
         taskRepository.save(task22);
         project2.getTasks().add(task22);
-        Task task23 = new Task("BadSide", "", ETask.TO_DO,
+        Task task23 = new Task("BadSide", "",
                 LocalDateTime.of(2020,10,31,23,59), 10);
         task23.setProject(project2);
         taskRepository.save(task23);
         project2.getTasks().add(task23);
-        Task task24 = new Task("Map", "", ETask.IN_PROCESS,
-                LocalDateTime.of(2020,8,29,20,39),
-                LocalDateTime.of(2020,10,29,23,59), 10);
+        Task task24 = new Task("Map", "",
+                LocalDateTime.of(2020,8,29,20,39), 10);
         task24.setProject(project2);
         taskRepository.save(task24);
         project2.getTasks().add(task24);
-        Task task25 = new Task("DreamTeam", "", ETask.DONE,
-                LocalDateTime.of(2020,8,20,20,39),
-                LocalDateTime.of(2020,8,29,10,39),
-                LocalDateTime.of(2020,9,29,23,59), 50);
+        Task task25 = new Task("DreamTeam", "",
+                LocalDateTime.of(2020,8,20,20,39), 50);
         task25.setProject(project2);
         taskRepository.save(task25);
         project2.getTasks().add(task25);
         projectRepository.save(project2);
 
-        Task task31 = new Task("Idea", "", ETask.IN_PROCESS,
-                LocalDateTime.of(2019,10,21,10,10),
-                LocalDateTime.of(2019,11,1,23,59), 2);
+        Task task31 = new Task("Idea", "",
+                LocalDateTime.of(2019,10,21,10,10), 2);
         task31.setProject(project3);
         taskRepository.save(task31);
         project3.getTasks().add(task31);
-        Task task32 = new Task("Sponsoring", "", ETask.DONE,
-                LocalDateTime.of(2019,1,1,23,59),
-                LocalDateTime.of(2019,1,27,23,59),
-                LocalDateTime.of(2020,2,1,23,59), 100);
+        Task task32 = new Task("Sponsoring", "",
+                LocalDateTime.of(2019,1,1,23,59), 100);
         task32.setProject(project3);
         taskRepository.save(task32);
         project3.getTasks().add(task32);
-        Task task33 = new Task("Promocja", "", ETask.TO_DO,
+        Task task33 = new Task("Promocja", "",
                 LocalDateTime.of(2020,4,30,23,59), 10);
         task33.setProject(project3);
         taskRepository.save(task33);
         project3.getTasks().add(task23);
-        Task task34 = new Task("Zapisy", "", ETask.IN_PROCESS,
+        Task task34 = new Task("Zapisy", "",
                 LocalDateTime.of(2020,5,29,20,39), 3);
         task34.setProject(project3);
         taskRepository.save(task34);
         projectRepository.save(project3);
 
-        Task task41 = new Task("Temat balu", "", ETask.DONE,
-                LocalDateTime.of(2020,1,1,10,10),
-                LocalDateTime.of(2020,2,1,10,10),
-                LocalDateTime.of(2020,2,1,23,59), 300);
+        Task task41 = new Task("Temat balu", "",
+                LocalDateTime.of(2020,1,1,10,10), 300);
         task41.setProject(project4);
         taskRepository.save(task41);
         project4.getTasks().add(task41);
-        Task task42 = new Task("Dofinansowanie", "", ETask.DONE,
-                LocalDateTime.of(2020,3,1,23,59),
-                LocalDateTime.of(2019,4,27,23,59),
-                LocalDateTime.of(2020,4,1,23,59), 100);
+        Task task42 = new Task("Dofinansowanie", "",
+                LocalDateTime.of(2020,3,1,23,59), 100);
         task42.setProject(project4);
         taskRepository.save(task42);
         project4.getTasks().add(task42);
-        Task task43 = new Task("Wydarzenie", "", ETask.TO_DO,
+        Task task43 = new Task("Wydarzenie", "",
                 LocalDateTime.of(2020,9,29,23,59), 10);
         task43.setProject(project4);
         taskRepository.save(task43);
         project4.getTasks().add(task43);
-        Task task44 = new Task("Wplaty", "", ETask.NEED_HELP,
+        Task task44 = new Task("Wplaty", "",
                 LocalDateTime.of(2020,10,29,20,39), 3);
         task44.setProject(project4);
         taskRepository.save(task44);
