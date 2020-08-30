@@ -35,8 +35,10 @@ public class DbInit implements CommandLineRunner {
 
     public void addData(){
         Role roleUser = new Role(ERole.ROLE_USER);
+        roleRepository.save(roleUser);
 
-        /*User user1 = new User("vt","Vlad", "Tumi", "vt@mail.pl", "aghagh", roleUser);
+
+        User user1 = new User("vt","Vlad", "Tumi", "vt@mail.pl", "aghagh", roleUser);
         userRepository.save(user1);
         User user2 = new User("at","Andriy", "Tri", "at@mail.pl", "aghagh", roleUser);
         userRepository.save(user2);
@@ -45,20 +47,9 @@ public class DbInit implements CommandLineRunner {
         User user4 = new User("ak","Ania", "Klu", "ak@mail.pl", "aghagh", roleUser);
         userRepository.save(user4);
         User user5 = new User("km","Kuba", "Mita", "km@mail.pl", "aghagh", roleUser);
-        userRepository.save(user5);*/
-
-        User user1 = new User("vt","Vlad", "Tumi", "vt@mail.pl", "aghagh");
-        userRepository.save(user1);
-        User user2 = new User("at","Andriy", "Tri", "at@mail.pl", "aghagh");
-        userRepository.save(user2);
-        User user3 = new User("lo","Lena", "Obe", "lo@mail.pl", "aghagh");
-        userRepository.save(user3);
-        User user4 = new User("ak","Ania", "Klu", "ak@mail.pl", "aghagh");
-        userRepository.save(user4);
-        User user5 = new User("km","Kuba", "Mita", "km@mail.pl", "aghagh");
         userRepository.save(user5);
 
-        roleUser.setUsers(Set.of(user1, user2,user3,user4,user5));
+        roleUser.setUsers(Set.of(user2,user3,user4,user5));
         roleRepository.save(roleUser);
 
         Project project1 = new Project("Web App", "Project for hackathon", LocalDateTime.of(2020,10,11,11,0));
